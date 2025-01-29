@@ -1,0 +1,18 @@
+FROM node:20
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN npm install
+
+COPY . .
+
+# Instale o Nodemon para desenvolvimento
+RUN npm install -g nodemon
+
+# Exponha a porta do backend
+EXPOSE 4000
+
+# Iniciar o backend no modo de desenvolvimento
+CMD ["npm", "run", "dev"]

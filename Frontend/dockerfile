@@ -1,0 +1,18 @@
+FROM node:20
+
+WORKDIR /app
+
+# Copie os arquivos de configuração
+COPY package.json package-lock.json ./
+
+# Instale as dependências
+RUN npm install
+
+# Copie o restante do código para o container
+COPY . .
+
+# Exponha a porta padrão do Vite
+EXPOSE 5173
+
+# Use o script "start" para rodar o servidor de desenvolvimento
+CMD ["npm", "start"]

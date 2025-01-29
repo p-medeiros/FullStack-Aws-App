@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    container_name: my_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456@
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432 # Expõe o PostgreSQL para acesso externo
+    networks:
+      - app_network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: backend
+    environment:
+      DATABASE_URL: "postgresql://postgres:123456@my_postgres:5432/postgres?schema=public"
+      NODE_ENV: development
+    ports:
+      - 4000:4000 # Expõe o backend
+    networks:
+      - app_network
+    volumes:
+      - ./Backend:/app
+      - /app/node_modules
+    command: npm run dev
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    environment:
+      NODE_ENV: development
+    ports:
+      - 5173:5173 # Expõe o frontend
+    networks:
+      - app_network
+    volumes:
+      - ./Frontend:/app
+      - /app/node_modules
+    command: npm run dev
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend
+          target: /src/frontend
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
