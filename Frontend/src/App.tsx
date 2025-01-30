@@ -4,10 +4,12 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import ProTip from './ProTip';
-import { Grid2 as Grid, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
+import {Grid2 as Grid} from '@mui/material';
+
 import SistemAPI from './api/SistemAPI';
-import UserCard from './components/userCard';
 import { User } from './models/post.interface';
+import UserCard from './components/MyComponents/userCard';
 
 function Copyright() {
   return (
@@ -43,11 +45,7 @@ const UsersPage = () => {
 
   return (
     <Grid>
-      {users.map((p: User) => {
-        return (
-          <UserCard user={p} />
-        )
-      })}
+      {users.map((p: User) => { return <UserCard user={p} /> })}
     </Grid>
 
   )
