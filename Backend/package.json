@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts & npx prisma studio ",
     "dev2": "tsx watch src/index.ts",
     "start": "node dist/index.js",
-    "build": "tsc"
+    "build": "tsc",
+    "studio": "npx prisma studio"
   },
   "keywords": [],
   "author": "",
