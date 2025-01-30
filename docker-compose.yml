@@ -21,10 +21,11 @@ services:
       dockerfile: Dockerfile
     container_name: backend
     environment:
-      DATABASE_URL: "postgresql://postgres:123456@my_postgres:5432/postgres?schema=public"
+      DATABASE_URL: "postgresql://postgres:123456@@postgres:5432/postgres?schema=public"
       NODE_ENV: development
     ports:
       - 4000:4000 # Expõe o backend
+      - 5555:5555 # Porta do Prisma Studio
     networks:
       - app_network
     volumes:
