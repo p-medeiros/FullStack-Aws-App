@@ -26,6 +26,7 @@ services:
     ports:
       - 4000:4000 # Expõe o backend
       - 5555:5555 # Porta do Prisma Studio
+      - 3333:3333 # Porta do  Express
     networks:
       - app_network
     volumes:
