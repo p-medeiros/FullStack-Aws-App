@@ -5,10 +5,11 @@ const prisma = new PrismaClient()
 
 
 export async function allUsers(req: Request, res: Response) {
-  const users = await prisma.user.findMany(
 
-  )
+  const users = await prisma.user.findMany()
+  console.log(users)
   res.status(200).send(users)
+
 }
 
 export async function findUser(req: Request, res: Response) {
