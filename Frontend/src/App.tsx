@@ -1,19 +1,10 @@
-import { useEffect, useState } from 'react';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import ProTip from './ProTip';
-import { TextField } from '@mui/material';
-import { Grid2 as Grid } from '@mui/material';
-
-import SistemAPI from './api/SistemAPI';
-import { User } from './models/post.interface';
-import UserCard from './components/MyComponents/userCard';
-
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./routes";
-
+import AppTheme from "./theme/AppTheme";
+import SideMenu from "./components/SideMenu";
+import AppNavbar from "./components/AppNavbar";
+import { Box, CssBaseline } from "@mui/material";
+import Header from "./components/Header";
 
 // function Copyright() {
 //   return (
@@ -58,7 +49,17 @@ import { AppRoutes } from "./routes";
 export default function App() {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <AppTheme>
+        <Box sx={{ display: "flex" }}>
+          <SideMenu />
+          <CssBaseline enableColorScheme />
+          <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
+            <Header />
+            <AppNavbar />
+            <AppRoutes />
+          </Box>
+        </Box>
+      </AppTheme>
     </BrowserRouter>
   );
 }

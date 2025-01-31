@@ -7,6 +7,7 @@ import MenuButton from './MenuButton';
 import ColorModeIconDropdown from '.././theme/ColorModeIconDropdown';
 
 import Search from './Search';
+import { Divider } from '@mui/material';
 
 export default function Header() {
   return (
@@ -18,7 +19,7 @@ export default function Header() {
         alignItems: { xs: 'flex-start', md: 'center' },
         justifyContent: 'space-between',
         maxWidth: { sm: '100%', md: '1700px' },
-        pt: 1.5,
+        padding: 1.5,
       }}
       spacing={2}
     >
