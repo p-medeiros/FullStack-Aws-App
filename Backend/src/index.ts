@@ -78,7 +78,7 @@ export const createPost = handleError(async (req: Request, res: Response) => {
 
 export const getAllPosts = handleError(async (req: Request, res: Response) => {
   const posts = await prisma.post.findMany({
-    // include: { author: true },
+    include: { author: true },
   })
   res.status(200).json(posts)
 })
