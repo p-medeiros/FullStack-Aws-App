@@ -24,14 +24,6 @@ export const getAllUsers = handleError(async (req: Request, res: Response) => {
   res.status(200).json(users)
 })
 
-// export async function allUsers(req: Request, res: Response) {
-
-//   const users = await prisma.user.findMany()
-//   console.log(users)
-//   res.status(200).send(users)
-
-// }
-
 export const getUserById = handleError(async (req: Request, res: Response) => {
   const { id } = req.params
   const user = await prisma.user.findUnique({
@@ -40,16 +32,6 @@ export const getUserById = handleError(async (req: Request, res: Response) => {
   })
   res.status(200).json(user)
 })
-
-
-// export async function findUser(req: Request, res: Response) {
-//   const users = await prisma.user.findUnique({
-//     where: {
-//       id: parseInt(req.params['id'])
-//     }
-//   })
-//   res.status(200).send(users)
-//   }
 
 export const updateUser = handleError(async (req: Request, res: Response) => {
   const { id } = req.params

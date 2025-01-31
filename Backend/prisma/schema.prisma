@@ -20,6 +20,7 @@ model Post {
   updatedAt DateTime @updatedAt
   title     String   @db.VarChar(255)
   content   String?
+  imageUrl  String?  @db.VarChar(500) // URL da imagem do post
   published Boolean  @default(false)
   authorId  Int
   //relations
@@ -27,11 +28,12 @@ model Post {
 }
 
 model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  userId Int     @unique
+  id      Int     @id @default(autoincrement())
+  bio     String?
+  avatar  String? @db.VarChar(500) // URL do avatar do usuário
+  userId  Int     @unique
   //relations
-  user   User    @relation(fields: [userId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
 }
 
 model User {
@@ -42,3 +44,4 @@ model User {
   posts   Post[]
   profile Profile?
 }
+
