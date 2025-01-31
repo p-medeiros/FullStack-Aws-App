@@ -2,11 +2,13 @@ import express from 'express'
 import cors from 'cors'; 
 import { Router, Request, Response } from 'express';
 import * as controllers from './index'
+import { Populete } from './seed';
 
 
 const app = express();
 
 const route = Router()
+const population = Populete()
 
 app.use(express.json())
 app.use(cors())

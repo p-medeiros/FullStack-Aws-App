@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { Request, Response , NextFunction} from 'express'
+import { Request, Response, NextFunction } from 'express'
 
 const prisma = new PrismaClient()
 
@@ -20,6 +20,7 @@ export const getAllUsers = handleError(async (req: Request, res: Response) => {
   const users = await prisma.user.findMany({
     // include: { posts: true, profile: true },
   })
+  console.log('teste')
   res.status(200).json(users)
 })
 
@@ -59,9 +60,6 @@ export const updateUser = handleError(async (req: Request, res: Response) => {
   })
   res.status(200).json(user)
 })
-
-
-
 
 export const deleteUser = handleError(async (req: Request, res: Response) => {
   const { id } = req.params

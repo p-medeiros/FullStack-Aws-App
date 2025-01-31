@@ -33,6 +33,15 @@ services:
       - ./Backend:/app
       - /app/node_modules
     command: npm run dev
+    develop:
+      watch:
+        - action: sync
+          path: ./backend
+          target: /src/backend
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
     depends_on:
       - postgres
 
@@ -60,6 +69,8 @@ services:
             - node_modules/
         - action: rebuild
           path: package.json
+    depends_on:
+      - backend
 
 networks:
   app_network:
