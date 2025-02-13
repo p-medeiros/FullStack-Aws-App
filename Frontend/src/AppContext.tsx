@@ -7,6 +7,8 @@ type Post = {
   title: string;
   content?: string;
   createdAt: string;
+  published: boolean;
+  authorId: number;
   author: {
     name?: string;
     profile?: {

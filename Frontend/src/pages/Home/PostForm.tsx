@@ -13,7 +13,7 @@ interface PostFormProps {
 }
 
 export default function PostForm({ initialValues, onCancel }: PostFormProps) {
-  const { addPost, updatePost } = useAppContext();
+  const { addPost, updatePost, setPosts,posts } = useAppContext();
 
   const formik = useFormik({
     initialValues: initialValues || { title: '', content: '' },
@@ -22,12 +22,14 @@ export default function PostForm({ initialValues, onCancel }: PostFormProps) {
         if (initialValues?.id) {
           // Editar post existente
           const response = await SistemAPI.put(`/posts/${initialValues.id}`, values);
-          updatePost(initialValues.id, response.data);
+          setPosts(posts.map((post) => (post.id === initialValues?.id ? response.data : post)));
+          // updatePost(initialValues.id, values);
         } else {
             console.log('value', values)
           // Criar novo post
           const response = await SistemAPI.post('/posts', {...values, published: true, authorId: 1});
-          addPost(response.data);
+          setPosts([...posts, response.data]);
+          // addPost({...values, published: true, authorId: 1});
         }
         resetForm(); // Limpa o formulário após o envio
         onCancel(); // Fecha o formulário
