@@ -26,7 +26,7 @@ export default function PostForm({ initialValues, onCancel }: PostFormProps) {
         } else {
             console.log('value', values)
           // Criar novo post
-          const response = await SistemAPI.post('/posts', {...values, published: true, authorId: 5});
+          const response = await SistemAPI.post('/posts', {...values, published: true, authorId: 1});
           addPost(response.data);
         }
         resetForm(); // Limpa o formulário após o envio
