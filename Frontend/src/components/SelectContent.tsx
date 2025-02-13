@@ -55,6 +55,7 @@ export default function SelectContent() {
           pl: 1,
         },
       }}
+      disabled={true}
     >
       <ListSubheader sx={{ pt: 0 }}>Production</ListSubheader>
       <MenuItem value="">

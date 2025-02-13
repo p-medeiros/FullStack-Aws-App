@@ -1,4 +1,7 @@
-import { Card, CardHeader, CardContent, Typography, Avatar } from "@mui/material";
+// PostCard.tsx
+import { Card, CardHeader, CardContent, Typography, Avatar, IconButton } from '@mui/material';
+import { Edit, Delete } from '@mui/icons-material';
+import { useAppContext } from '../../AppContext';
 
 interface PostCardProps {
   post: {
@@ -11,30 +14,38 @@ interface PostCardProps {
       profile?: {
         bio?: string;
       };
-    };
+    } | undefined;
   };
+  onEdit: () => void;
 }
 
-export default function PostCard({ post }: PostCardProps) {
-  const userName = post.author?.name || "Usuário Desconhecido";
-  const userBio = post.author?.profile?.bio || "Sem biografia.";
-  const postTitle = post.title || "Sem título.";
-  const postContent = post.content || "Sem conteúdo disponível.";
-  const formattedDate = new Date(post.createdAt).toLocaleString();
+export default function PostCard({ post, onEdit }: PostCardProps) {
+  const { deletePost } = useAppContext();
+
+  const handleDelete = () => {
+    deletePost(post.id);
+  };
 
   return (
-    <Card sx={{ width: "100%", boxShadow: 3 }}>
+    <Card sx={{ width: '100%', boxShadow: 3 }}>
       <CardHeader
-        avatar={<Avatar>{userName.charAt(0)}</Avatar>} // Primeira letra do nome
-        title={userName}
-        subheader={formattedDate}
+        avatar={<Avatar>{post.author?.name?.charAt(0)}</Avatar>}
+        title={post.author?.name || 'Usuário Desconhecido'}
+        subheader={new Date(post.createdAt).toLocaleString()}
+        action={
+          <>
+            <IconButton onClick={onEdit}>
+              <Edit />
+            </IconButton>
+            <IconButton onClick={handleDelete}>
+              <Delete />
+            </IconButton>
+          </>
+        }
       />
       <CardContent>
-        <Typography variant="h6">{postTitle}</Typography>
-        <Typography variant="body1">{postContent}</Typography>
-        <Typography variant="caption" color="text.secondary">
-          {userBio}
-        </Typography>
+        <Typography variant="h6">{post.title}</Typography>
+        <Typography variant="body1">{post.content}</Typography>
       </CardContent>
     </Card>
   );
