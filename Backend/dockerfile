@@ -3,19 +3,13 @@ FROM node:20
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-
 RUN npm install
 
-COPY . .
+COPY . .   
+# this should come *after* install, as you're doing
 
-# Instale o Nodemon para desenvolvimento
+# Optional: install nodemon if you actually need it
 # RUN npm install -g nodemon
-#RUN npx prisma generate
-#RUN npx prisma db push 
-#RUN npx prisma  studio
 
-# Exponha a porta do backend
 EXPOSE 4000
-
-# Iniciar o backend no modo de desenvolvimento
 CMD ["npm", "run", "dev"]
