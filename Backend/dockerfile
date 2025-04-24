@@ -9,7 +9,7 @@ RUN npm install
 COPY . .
 
 # Instale o Nodemon para desenvolvimento
-RUN npm install -g nodemon
+# RUN npm install -g nodemon
 #RUN npx prisma generate
 #RUN npx prisma db push 
 #RUN npx prisma  studio
